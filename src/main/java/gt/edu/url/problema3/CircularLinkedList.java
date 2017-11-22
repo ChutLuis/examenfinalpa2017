@@ -20,7 +20,7 @@ public class CircularLinkedList<E> implements LeakyStack<E> {
 		}
 	}
 	
-public CircularLinkedList<E>(int top1){
+public CircularLinkedList(int top1){
 	this.top= top1;
 }
 private int top;
@@ -52,7 +52,11 @@ private int top;
 		if(size == 0) {
 			tail = new Node<>(e, null);
 			tail.setNext(tail);
-		}else {
+		}else if(size==top) 
+			{
+			saveHistory(e);
+		}
+		else {
 			Node<E> newest = new Node<>(e, tail.getNext());
 			tail.setNext(newest);
 		}
@@ -75,23 +79,18 @@ private int top;
 
 	@Override
 	public E saveHistory(E e) {
-		if() {
-			
-		}
-		addFirst(e);
-		
-		return null;
-	}
+		addFirst(e);				
+		return removeFirst();
+			}
 
 	@Override
-	public E actual() {
-		// TODO Auto-generated method stub
-		return null;
+	public E actual() {		
+		return (E) tail;
 	}
 
 	@Override
 	public E undo() {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 }
